@@ -1,14 +1,16 @@
 const express = require('express');
-const { runInContext } = require('vm');
 const db = require('./config/connection')
 
 const User = require('./models/User')
+const workoutRoutes = require('./controllers/workouts')
 
 const PORT = process.env.PORT || 3001
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('api/workouts', workoutRoutes)
 
 run()
 async function run() {
